@@ -1,3 +1,8 @@
+// ============================================
+// FASE 4: ELEMENTOS DINÁMICOS CON JAVASCRIPT
+// VERSIÓN CORREGIDA PARA GITHUB PAGES
+// ============================================
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('JavaScript cargado correctamente');
     
@@ -7,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     inicializarIdioma();
 });
 
+// ========== 1. MENÚ DESPLEGABLE ==========
 function crearMenusDesplegables() {
     const navList = document.querySelector('nav ul');
     if (!navList) return;
@@ -90,6 +96,7 @@ function crearMenusDesplegables() {
     });
 }
 
+// ========== 2. MENSAJE PERSONALIZADO POR HORA ==========
 function crearMensajeBienvenida() {
     const hora = new Date().getHours();
     let saludo = '';
@@ -128,6 +135,7 @@ function crearMensajeBienvenida() {
     if (header) header.insertAdjacentElement('afterend', mensajeDiv);
 }
 
+// ========== 3. SLIDER DE IMÁGENES (CORREGIDO) ==========
 let sliderInterval;
 let currentSlide = 0;
 
@@ -135,12 +143,16 @@ function iniciarSlider() {
     const banner = document.querySelector('.banner');
     if (!banner || banner.querySelector('.slides-container')) return;
     
+    // RUTAS CORREGIDAS: sin ./ al principio
     const slidesData = [
-        { imagen: './images/banner-reposteras.png', titulo: 'Reposteras de España', subtitulo: 'Tradición con Sabor a Historia' },
-        { imagen: './images/foto1.png', titulo: 'El Horno de Siempre', subtitulo: 'Donde nacen los mejores dulces' },
-        { imagen: './images/foto2.png', titulo: 'Manos con Historia', subtitulo: 'El legado de nuestras abuelas' },
-        { imagen: './images/foto3.png', titulo: 'Sabores que Perduran', subtitulo: 'Recetas transmitidas por generaciones' }
+        { imagen: 'images/banner-reposteras.png', titulo: 'Reposteras de España', subtitulo: 'Tradición con Sabor a Historia' },
+        { imagen: 'images/foto1.png', titulo: 'El Horno de Siempre', subtitulo: 'Donde nacen los mejores dulces' },
+        { imagen: 'images/foto2.png', titulo: 'Manos con Historia', subtitulo: 'El legado de nuestras abuelas' },
+        { imagen: 'images/foto3.png', titulo: 'Sabores que Perduran', subtitulo: 'Recetas transmitidas por generaciones' }
     ];
+    
+    // Guardar el contenido original del banner
+    const bannerContent = banner.querySelector('.banner-content');
     
     banner.innerHTML = '';
     banner.style.cssText = `
@@ -153,7 +165,7 @@ function iniciarSlider() {
     
     const slidesContainer = document.createElement('div');
     slidesContainer.className = 'slides-container';
-    slidesContainer.style.cssText = `position: relative; width: 100%; height: 100%;`;
+    slidesContainer.style.cssText = 'position: relative; width: 100%; height: 100%;';
     
     slidesData.forEach((data, index) => {
         const slide = document.createElement('div');
@@ -183,18 +195,65 @@ function iniciarSlider() {
     
     const prevBtn = document.createElement('button');
     prevBtn.innerHTML = '❮';
-    prevBtn.style.cssText = `position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.8rem; z-index: 20;`;
+    prevBtn.setAttribute('aria-label', 'Anterior');
+    prevBtn.style.cssText = `
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.6);
+        color: white;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.8rem;
+        z-index: 20;
+        transition: all 0.3s;
+    `;
     
     const nextBtn = document.createElement('button');
     nextBtn.innerHTML = '❯';
-    nextBtn.style.cssText = `position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.8rem; z-index: 20;`;
+    nextBtn.setAttribute('aria-label', 'Siguiente');
+    nextBtn.style.cssText = `
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.6);
+        color: white;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.8rem;
+        z-index: 20;
+        transition: all 0.3s;
+    `;
     
     const dotsContainer = document.createElement('div');
-    dotsContainer.style.cssText = `position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 20;`;
+    dotsContainer.style.cssText = `
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 20;
+    `;
     
     slidesData.forEach((_, index) => {
         const dot = document.createElement('span');
-        dot.style.cssText = `width: 12px; height: 12px; border-radius: 50%; background: ${index === 0 ? '#E6B422' : 'rgba(255,255,255,0.6)'}; cursor: pointer;`;
+        dot.style.cssText = `
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: ${index === 0 ? '#E6B422' : 'rgba(255,255,255,0.6)'};
+            cursor: pointer;
+            transition: all 0.3s;
+        `;
         dotsContainer.appendChild(dot);
     });
     
@@ -209,38 +268,96 @@ function iniciarSlider() {
     function showSlide(index) {
         if (index < 0) index = slides.length - 1;
         if (index >= slides.length) index = 0;
-        slides.forEach((slide, i) => slide.style.display = i === index ? 'flex' : 'none');
-        dots.forEach((dot, i) => dot.style.background = i === index ? '#E6B422' : 'rgba(255,255,255,0.6)');
+        slides.forEach((slide, i) => {
+            slide.style.display = i === index ? 'flex' : 'none';
+        });
+        dots.forEach((dot, i) => {
+            dot.style.background = i === index ? '#E6B422' : 'rgba(255,255,255,0.6)';
+        });
         currentSlide = index;
+        
         if (sliderInterval) clearInterval(sliderInterval);
-        sliderInterval = setInterval(() => showSlide(currentSlide + 1), 4000);
+        sliderInterval = setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 4000);
     }
     
-    prevBtn.onclick = () => showSlide(currentSlide - 1);
-    nextBtn.onclick = () => showSlide(currentSlide + 1);
-    dots.forEach((dot, i) => dot.onclick = () => showSlide(i));
+    prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => showSlide(i));
+    });
+    
+    prevBtn.addEventListener('mouseenter', () => {
+        prevBtn.style.backgroundColor = '#E6B422';
+        prevBtn.style.color = '#3D2317';
+    });
+    prevBtn.addEventListener('mouseleave', () => {
+        prevBtn.style.backgroundColor = 'rgba(0,0,0,0.6)';
+        prevBtn.style.color = 'white';
+    });
+    nextBtn.addEventListener('mouseenter', () => {
+        nextBtn.style.backgroundColor = '#E6B422';
+        nextBtn.style.color = '#3D2317';
+    });
+    nextBtn.addEventListener('mouseleave', () => {
+        nextBtn.style.backgroundColor = 'rgba(0,0,0,0.6)';
+        nextBtn.style.color = 'white';
+    });
     
     showSlide(0);
 }
 
+// ========== 4. SELECTOR DE IDIOMA ==========
 function inicializarIdioma() {
     const selector = document.getElementById('selector-idioma');
     if (!selector) return;
     
     selector.addEventListener('change', function() {
         if (this.value === 'en') {
-            const textos = {
-                '#reposteras h2': 'Featured Pastry Women',
-                '#recetas h2': 'Recipes by Region',
-                '#historia h2': 'The Legacy of Spanish Pastry Women',
-                '#multimedia h2': 'Multimedia'
-            };
-            for (const [selector, texto] of Object.entries(textos)) {
-                const el = document.querySelector(selector);
-                if (el) el.textContent = texto;
+            // Traducción al inglés
+            const tituloReposteras = document.querySelector('#reposteras h2');
+            if (tituloReposteras) tituloReposteras.textContent = 'Featured Pastry Women';
+            
+            const tituloRecetas = document.querySelector('#recetas h2');
+            if (tituloRecetas) tituloRecetas.textContent = 'Recipes by Region';
+            
+            const tituloHistoria = document.querySelector('#historia h2');
+            if (tituloHistoria) tituloHistoria.textContent = 'The Legacy of Spanish Pastry Women';
+            
+            const tituloMultimedia = document.querySelector('#multimedia h2');
+            if (tituloMultimedia) tituloMultimedia.textContent = 'Multimedia';
+            
+            const btnConoce = document.querySelector('.banner .btn, .slide .btn');
+            if (btnConoce) btnConoce.textContent = 'Meet the Pastry Women';
+            
+            const tituloSlider = document.querySelector('.slide h1');
+            if (tituloSlider) {
+                const titulosEn = [
+                    'Spanish Pastry Women',
+                    'The Traditional Oven',
+                    'Hands with History',
+                    'Flavors that Last'
+                ];
+                if (titulosEn[currentSlide]) {
+                    tituloSlider.textContent = titulosEn[currentSlide];
+                }
             }
-            const btn = document.querySelector('.banner .btn, .slide .btn');
-            if (btn) btn.textContent = 'Meet the Pastry Women';
+            
+            const subtituloSlider = document.querySelector('.slide p');
+            if (subtituloSlider) {
+                const subtitulosEn = [
+                    'Tradition with a Taste of History',
+                    'Where the best sweets are born',
+                    'The legacy of our grandmothers',
+                    'Recipes passed down through generations'
+                ];
+                if (subtitulosEn[currentSlide]) {
+                    subtituloSlider.textContent = subtitulosEn[currentSlide];
+                }
+            }
+            
+            console.log('Idioma cambiado a inglés');
         } else {
             location.reload();
         }
