@@ -83,7 +83,7 @@ nav a:hover {
 
 .banner {
     height: 25rem;
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/banner-reposteras.png');
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/banner-reposteras.png');
     background-size: cover;
     background-position: center;
     display: flex;
