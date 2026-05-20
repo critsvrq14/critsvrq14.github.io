@@ -7,11 +7,10 @@
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: #2D2A26; /* Color con mejor contraste sobre fondos claros */
+    color: #2D2A26;
     background-color: #FFF9F0;
 }
 
-/* Clase para lectores de pantalla (elementos visualmente ocultos pero accesibles) */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -23,7 +22,6 @@ body {
     border: 0;
 }
 
-/* Header */
 header {
     display: flex;
     justify-content: space-between;
@@ -61,7 +59,6 @@ nav a {
     transition: color 0.3s;
 }
 
-/* Estilo de foco visible para accesibilidad teclado */
 nav a:focus-visible,
 .btn:focus-visible,
 select:focus-visible,
@@ -84,7 +81,6 @@ nav a:hover {
     font-weight: bold;
 }
 
-/* Banner */
 .banner {
     height: 25rem;
     background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/banner-reposteras.png');
@@ -121,7 +117,6 @@ nav a:hover {
     color: white;
 }
 
-/* Secciones generales */
 section {
     padding: 3.75rem 3rem;
 }
@@ -133,7 +128,6 @@ h2 {
     color: #3D2317;
 }
 
-/* Tarjetas */
 .tarjetas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
@@ -175,7 +169,6 @@ h2 {
     display: inline-block;
 }
 
-/* Sección informacion */
 .informacion {
     background-color: #F5E6D3;
     text-align: center;
@@ -204,7 +197,6 @@ h2 {
     color: #C96E3D;
 }
 
-/* Multimedia */
 .multimedia {
     padding: 3.75rem 3rem;
 }
@@ -245,7 +237,6 @@ h2 {
     border-radius: 0.625rem;
 }
 
-/* Footer */
 footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -288,7 +279,6 @@ footer a:hover {
     color: #E6B422;
 }
 
-/* MEDIA QUERIES para diseño adaptable */
 @media (max-width: 1024px) {
     .galeria-imagenes {
         grid-template-columns: repeat(2, 1fr);
@@ -357,7 +347,6 @@ footer a:hover {
     }
 }
 
-/* Fondo para sección de recetas (reemplaza el inline style) */
 .recetas-bg {
     background-color: #F9F9F9;
 }
